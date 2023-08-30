@@ -1,0 +1,5 @@
+{"OpenAI": {
+    "apiKey": "98dd4b1a60dc40d9a47e0630d45c1746",
+    "deploymentName": "wasabi_peas_openai_demo_001",
+    "endpoint": "https://triparc-hackathon-openai.openai.azure.com/"
+}}

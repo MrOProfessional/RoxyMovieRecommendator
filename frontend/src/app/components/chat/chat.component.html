@@ -1,0 +1,36 @@
+<mat-dialog-content class="itinerary">
+  <mat-drawer-container class="itinerary">
+    <mat-drawer opened class="itinerary-sidenav">
+      <div style="height: 84vh;">
+        <ng-container *ngFor="let card of cards">
+          <mat-card
+            [class.itinerary-answer]="card.kind.toUpperCase() == 'RESPONSE'"
+            [class.itinerary-question]="card.kind.toUpperCase() == 'REQUEST'"
+          >
+            <mat-card-content>
+              <p
+                class="spinner-wrapper"
+                *ngIf="showSpinner(card); else showContentOnly"
+              >
+                <mat-spinner [diameter]="24"></mat-spinner>
+                <span style="padding-left: 10px">{{ card.content }}</span>
+              </p>
+              <ng-template #showContentOnly>
+                    {{ card.content }}
+              </ng-template>
+            </mat-card-content>
+          </mat-card>
+        </ng-container>
+      </div>
+
+      <mat-form-field
+        appearance="fill"
+        style="width: 100%"
+        class="itinerary-input-text"
+      >
+        <mat-label>Send a message</mat-label>
+        <input matInput (keydown.enter)="onAsk()" [(ngModel)]="input" />
+      </mat-form-field>
+    </mat-drawer>
+  </mat-drawer-container>
+</mat-dialog-content>
