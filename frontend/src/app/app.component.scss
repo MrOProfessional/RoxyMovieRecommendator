@@ -1,0 +1,58 @@
+@import 'colors.scss';
+
+.container{
+    margin: 0 auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    padding: 0 15px;
+    width: 100%;
+}
+
+.content{
+    height: 100%;
+}
+
+.toolbar{
+    background-color: $color-primary;
+    color: $color-black;
+
+    &-identity{
+        display: flex;
+        align-items: center;
+    }
+}
+
+.footer{
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    font-size: 12px;
+    width: 100%;
+}
+
+.custom-dialog{
+    margin: 25px;
+    display: block;
+}
+
+.chat-button{
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+
+    &-img{
+        cursor: pointer;
+        
+    }
+}
+
+.green-circle { 
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    width: 13px;
+    height: 13px;
+    background-color: green;
+    border-radius: 50%;
+ }

@@ -1,0 +1,148 @@
+openapi: 3.0.1
+info:
+  title: Weather Information
+  description: A service that provides weather information for a specific city
+  version: v1
+servers:
+  - url: 'https://open-weather13.p.rapidapi.com'
+paths:
+  '/city/{city}':
+    get:
+      summary: Get weather information for a specific city
+      operationId: getWeatherForCity
+      parameters:
+        - in: path
+          name: city
+          schema:
+            type: string
+          required: true
+          description: The name of the city for which weather information is requested.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+      security:
+        - RapidAPIKey: []
+  '/city/latlon/{lat}/{lon}':
+    get:
+      summary: Get weather information for specific latitude and longitude coordinates
+      operationId: getWeatherForCoordinates
+      parameters:
+        - in: path
+          name: lat
+          schema:
+            type: string
+          required: true
+          description: The latitude for which weather information is requested.
+        - in: path
+          name: lon
+          schema:
+            type: string
+          required: true
+          description: The longitude for which weather information is requested.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherResponse'
+      security:
+        - RapidAPIKey: []
+components:
+  schemas:
+    WeatherResponse:
+      type: object
+      properties:
+        coord:
+          type: object
+          properties:
+            lon:
+              type: number
+            lat:
+              type: number
+        weather:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+              main:
+                type: string
+              description:
+                type: string
+              icon:
+                type: string
+        base:
+          type: string
+        main:
+          type: object
+          properties:
+            temp:
+              type: number
+            feels_like:
+              type: number
+            temp_min:
+              type: number
+            temp_max:
+              type: number
+            pressure:
+              type: integer
+            humidity:
+              type: integer
+        visibility:
+          type: integer
+        wind:
+          type: object
+          properties:
+            speed:
+              type: number
+            deg:
+              type: integer
+            gust:
+              type: number
+        clouds:
+          type: object
+          properties:
+            all:
+              type: integer
+        dt:
+          type: integer
+        sys:
+          type: object
+          properties:
+            type:
+              type: integer
+            id:
+              type: integer
+            country:
+              type: string
+            sunrise:
+              type: integer
+            sunset:
+              type: integer
+        timezone:
+          type: integer
+        id:
+          type: integer
+        name:
+          type: string
+        cod:
+          type: integer
+  securitySchemes:
+    rapidApiKey:
+      type: enum
+      in: header
+      name: X-RapidAPI-Key
+      description: API key required to authorize requests
+      x-api-key-variable: 0d986c8e03msh6a30064a64034dep138c2djsnf4f8bff57ae7
+    rapidApiHost:
+      type: string
+      in: header
+      name: X-RapidAPI-Host
+      description: API Host required to authorize requests
+      x-api-host-variable: open-weather13.p.rapidapi.com

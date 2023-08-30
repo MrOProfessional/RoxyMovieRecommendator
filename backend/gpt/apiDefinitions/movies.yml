@@ -1,0 +1,336 @@
+openapi: 3.0.1
+info:
+  title: Streaming guide for movies
+  description: A plugin that allows us to retrieve movies on different platforms
+  version: v1
+servers:
+  - url: 'https://streamlinewatch-streaming-guide.p.rapidapi.com'
+paths:
+  /movies:
+    get:
+      operationId: getMovies
+      summary: Get a movie list
+      parameters:
+        - in: query
+          name: region
+          schema:
+            type: string
+          description: 'The region for the movie availability, use US'
+        - in: query
+          name: sort
+          schema:
+            type: string
+            description: >-
+              Method to sort the records, optional, default. alphabetical
+              possible values such as alphabetical, popularity
+        - in: query
+          name: sources
+          schema:
+            type: string
+            description: >-
+              the platforms where the movies are available, you can use
+              netflix,hulu and prime
+        - in: query
+          name: offset
+          schema:
+            type: number
+            description: Skips this number of records.
+        - in: query
+          name: limit
+          schema:
+            type: number
+            description: Number of records to return per request.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getMoviesResponse'
+      security:
+        - RapidAPIKey: []
+  '/movies/{id}':
+    get:
+      operationId: getMovieById
+      summary: Get details of a specific movie
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integeropenapi: 3.0.1
+info:
+  title: Streaming guide for movies
+  description: A plugin that allows us to retrieve movies on different platforms
+  version: v1
+servers:
+  - url: 'https://streamlinewatch-streaming-guide.p.rapidapi.com'
+paths:
+  /movies:
+    get:
+      operationId: getMovies
+      summary: Get a movie list
+      parameters:
+        - in: query
+          name: region
+          schema:
+            type: string
+          description: 'The region for the movie availability, use US'
+        - in: query
+          name: sort
+          schema:
+            type: string
+            description: >-
+              Method to sort the records, optional, default. alphabetical
+              possible values such as alphabetical, popularity
+        - in: query
+          name: sources
+          schema:
+            type: string
+            description: >-
+              the platforms where the movies are available, you can use
+              netflix,hulu and prime
+        - in: query
+          name: offset
+          schema:
+            type: number
+            description: Skips this number of records.
+        - in: query
+          name: limit
+          schema:
+            type: number
+            description: Number of records to return per request.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getMoviesResponse'
+      security:
+        - RapidAPIKey: []
+  '/movies/{id}':
+    get:
+      operationId: getMovieById
+      summary: Get details of a specific movie
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            required: true
+            description: The unique identifier for the movie.
+        - in: params
+          name: platform
+          schema:
+            type: string
+            description: 'The platform, e.g., ''ios''.'
+        - in: params
+          name: region
+          schema:
+            type: string
+            description: 'The region for the movie availability, e.g., ''US''.'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getMovieByIdResponse'
+      security:
+        - RapidAPIKey: []
+components:
+  schemas:
+    getMoviesResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: integer
+            description: The unique identifier for the movie.
+          backdrop_path:
+            type: string
+            description: The path to the backdrop image.
+          genres:
+            type: array
+            items:
+              type: string
+              description: The genres of the movie.
+          original_title:
+            type: string
+            description: The original title of the movie.
+          overview:
+            type: string
+            description: A brief summary of the movie.
+          poster_path:
+            type: string
+            description: The path to the poster image.
+          release_date:
+            type: string
+            description: The release date of the movie.
+          title:
+            type: string
+            description: The title of the movie.
+    getMovieByIdResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: integer
+            description: The unique identifier for the movie.
+          backdrop_path:
+            type: string
+            description: The path to the backdrop image.
+          genres:
+            type: array
+            items:
+              type: string
+              description: The genres of the movie.
+          original_title:
+            type: string
+            description: The original title of the movie.
+          overview:
+            type: string
+            description: A brief summary of the movie.
+          poster_path:
+            type: string
+            description: The path to the poster image.
+          release_date:
+            type: string
+            description: The release date of the movie.
+          title:
+            type: string
+            description: The title of the movie.
+          sources:
+            type: array
+            items:
+              type: object
+              properties:
+                source:
+                  type: string
+                  description: >-
+                    The source platform for the movie, e.g., 'disney_plus',
+                    'apple_tv'.
+                link_ios:
+                  type: string
+                  description: The iOS-specific link to the movie.
+    securitySchemes:
+      RapidAPIKey:
+        type: apiKey
+        in: header
+        name: X-RapidAPI-Key
+        description: API key required to authorize requests
+        x-api-key-variable: 0d986c8e03msh6a30064a64034dep138c2djsnf4f8bff57ae7
+            required: true
+            description: The unique identifier for the movie.
+        - in: params
+          name: platform
+          schema:
+            type: string
+            description: 'The platform, e.g., ''ios''.'
+        - in: params
+          name: region
+          schema:
+            type: string
+            description: 'The region for the movie availability, e.g., ''US''.'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getMovieByIdResponse'
+      security:
+        - RapidAPIKey: []
+components:
+  schemas:
+    getMoviesResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: integer
+            description: The unique identifier for the movie.
+          backdrop_path:
+            type: string
+            description: The path to the backdrop image.
+          genres:
+            type: array
+            items:
+              type: string
+              description: The genres of the movie.
+          original_title:
+            type: string
+            description: The original title of the movie.
+          overview:
+            type: string
+            description: A brief summary of the movie.
+          poster_path:
+            type: string
+            description: The path to the poster image.
+          release_date:
+            type: string
+            description: The release date of the movie.
+          title:
+            type: string
+            description: The title of the movie.
+    getMovieByIdResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: integer
+            description: The unique identifier for the movie.
+          backdrop_path:
+            type: string
+            description: The path to the backdrop image.
+          genres:
+            type: array
+            items:
+              type: string
+              description: The genres of the movie.
+          original_title:
+            type: string
+            description: The original title of the movie.
+          overview:
+            type: string
+            description: A brief summary of the movie.
+          poster_path:
+            type: string
+            description: The path to the poster image.
+          release_date:
+            type: string
+            description: The release date of the movie.
+          title:
+            type: string
+            description: The title of the movie.
+          sources:
+            type: array
+            items:
+              type: object
+              properties:
+                source:
+                  type: string
+                  description: >-
+                    The source platform for the movie, e.g., 'disney_plus',
+                    'apple_tv'.
+                link_ios:
+                  type: string
+                  description: The iOS-specific link to the movie.
+    securitySchemes:
+      rapidApiKey:
+        type: enum
+        in: header
+        name: X-RapidAPI-Key
+        description: API key required to authorize requests
+        x-api-key-variable: 0d986c8e03msh6a30064a64034dep138c2djsnf4f8bff57ae7
+      rapidApiHost:
+        type: string
+        in: header
+        name: X-RapidAPI-Host
+        description: API Host required to authorize requests
+        x-api-key-variable: streamlinewatch-streaming-guide.p.rapidapi.com
+      
